@@ -23,6 +23,8 @@ def validate_attendee(attendee: dict) -> list:
         errors.append("Invalid ticket type")
     
     code = attendee.get("registration_code") 
-    if (code[:3] != "EV-") or (not code[3:].isdigit()) or (len(code) != 7): 
+    if code is None:
+        errors.append("Invalid registration code")
+    elif (code[:3] != "EV-") or (not code[3:].isdigit()) or (len(code) != 7): 
         errors.append("Invalid registration code")
     return errors
