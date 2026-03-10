@@ -8,7 +8,9 @@ class TestValidator(unittest.TestCase):
             "name": "Sara Palacios",
             "email": "sara@example.com",
             "age": 25,
-            "ticket_type": "vip"
+            "ticket_type": "vip",
+            "registration_code": "EV-1234"
+            
         }
         self.assertEqual(validate_attendee(attendee), [])
 
@@ -17,7 +19,8 @@ class TestValidator(unittest.TestCase):
             "name": "Juan",
             "email": "juanexample.com",
             "age": 20,
-            "ticket_type": "general"
+            "ticket_type": "general",
+            "registration_code": "EV-1234"
         }
         self.assertIn("Invalid email", validate_attendee(attendee))
 
@@ -26,9 +29,20 @@ class TestValidator(unittest.TestCase):
             "name": "Ana",
             "email": "ana@example.com",
             "age": 16,
-            "ticket_type": "student"
+            "ticket_type": "student",
+            "registration_code": "EV-1234"
         }
         self.assertIn("Attendee must be 18 or older", validate_attendee(attendee))
 
+    def test_invalid_code(self):
+        attendee = {
+            "name": "Ana",
+            "email": "ana@example.com",
+            "age": 20,
+            "ticket_type": "student",
+            "registration_code": "EV-12"
+        }
+        self.assertIn("Invalid registration code", validate_attendee(attendee))
+    
 if __name__ == "__main__":
     unittest.main()

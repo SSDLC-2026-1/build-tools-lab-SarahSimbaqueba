@@ -3,6 +3,7 @@ from validator import validate_attendee
 
 with open("data/attendees.json", "r", encoding="utf-8") as f:
     attendees = json.load(f)
+    
 
 valid_count = 0
 invalid_count = 0
